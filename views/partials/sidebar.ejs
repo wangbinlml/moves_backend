@@ -1,0 +1,60 @@
+<!-- Left side column. contains the logo and sidebar -->
+<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <div class="user-panel">
+            <div class="pull-left image">
+                <img src="/images/user2-160x160.jpg" class="img-circle"
+                     alt="User Image">
+            </div>
+            <div class="pull-left info">
+                <p>
+                    <% if (user) { %>
+                    <%= user.name %>
+                    <% } else { %>
+                    Alexander Pierce
+                    <% } %>
+                </p>
+                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+            </div>
+        </div>
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu" data-widget="tree">
+            <li class="header">主菜单</li>
+            <% if(menus.length > 0){ %>
+            <% menus.forEach(function(item, index){ %>
+            <li class="<% if(item['menu_child'].length > 0){ %>treeview<%}%> <% if(item['menu_id'] == menu_active['parent_id']){ %> active menu-open<% } %>">
+                <a href="<%= item['menu_url'] %>">
+                    <i class="glyphicon <%= item['menu_icon'] %>"></i> <span><%= item['menu_name'] %></span>
+                    <% if(item['menu_child'].length > 0){ %>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                    <% } %>
+                </a>
+                <% if(item['menu_child'].length > 0){ %>
+                <ul class="treeview-menu">
+                    <% item['menu_child'].forEach(function(child, index){ %>
+                    <li <% if(child['menu_id'] == menu_active['menu_id']){ %>class="active"
+                            <% } %>
+                    ><a href="<%= child['menu_url'] %>"><i
+                                    class="fa fa-circle-o"></i> <%= index + 1 %>：<%= child['menu_name'] %></a></li>
+                    <% }) %>
+                </ul>
+                <% } %>
+            </li>
+            <% })} else{ %>
+            <li class="treeview">
+                <a href="#">
+                    <i class="glyphicon"></i> <span>暂无菜单</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+            </li>
+            <% } %>
+        </ul>
+    </section>
+    <!-- /.sidebar -->
+</aside>
+
